@@ -9,32 +9,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
- * Standard Layout System with Fragment Expressions usage example
+ * Layout Dialect usage example.
  */
 @Controller
 @Secured("ROLE_USER")
-class EventController {
+class EventController_LayoutDialect {
 
     private final EventService eventService;
 
-    EventController(EventService eventService) {
+    EventController_LayoutDialect(EventService eventService) {
         this.eventService = eventService;
     }
 
     @ModelAttribute("module")
     public String module() {
-        return "events";
+        return "events-ld";
     }
 
-    @RequestMapping(value = "event", method = RequestMethod.GET)
+    @RequestMapping(value = "event-ld", method = RequestMethod.GET)
     public String events(Model model) {
         model.addAttribute("events", eventService.findAll());
-        return "event/event-list";
+        return "event-ld/event-list";
     }
 
-    @RequestMapping(value = "event/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "event-ld/{id}", method = RequestMethod.GET)
     public String event(@PathVariable("id") Long id, Model model) {
         model.addAttribute("event", eventService.findOne(id));
-        return "event/event";
+        return "event-ld/event";
     }
 }

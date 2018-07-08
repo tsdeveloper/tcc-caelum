@@ -1,69 +1,89 @@
 package com.caelum.tccjavaweb.event;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
-import java.time.Instant;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
-@SuppressWarnings("serial")
 @Entity
-@Table(name = "event")
-public class Event implements java.io.Serializable {
+public class Event {
 
-	@Id
-	@GeneratedValue
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-	@Column(unique = true)
-	private String email;
-	
-	@JsonIgnore
-	private String password;
+    @NotEmpty
+    private String title;
 
-	private String role = "ROLE_USER";
+    @NotEmpty
+    private String text;
 
-	private Instant created;
+    @Version
+    private Calendar created = Calendar.getInstance();
 
-    protected Event() {
+    public Calendar getDueTo() {
+        return dueTo;
+    }
 
-	}
-	
-	public Event(String email, String password, String role) {
-		this.email = email;
-		this.password = password;
-		this.role = role;
-		this.created = Instant.now();
-	}
+    public void setDueTo(Calendar dueTo) {
+        this.dueTo = dueTo;
+    }
 
-	public Long getId() {
-		return id;
-	}
+    private Calendar dueTo;
 
-    public String getEmail() {
-		return email;
-	}
+    public Event() {
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public Event(String title, String text, String date) {
+        this.title = title;
+        this.text = text;
+        this.dueTo = toCalendar(date);
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    private Calendar toCalendar(String dateString) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
+        try {
+            Date date = sdf.parse(dateString);
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(date);
+            return calendar;
+        } catch (ParseException e) {
+            return null;
+        }
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public String getRole() {
-		return role;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setRole(String role) {
-		this.role = role;
-	}
+    public Calendar getCreated() {
+        return created;
+    }
 
-	public Instant getCreated() {
-		return created;
-	}
+    public void setCreated(Calendar created) {
+        this.created = created;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
 }
