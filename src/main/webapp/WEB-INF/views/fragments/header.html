@@ -20,11 +20,12 @@
                 <li th:classappend="${module == 'home' ? 'active' : ''}">
                     <a href="#" th:href="@{/}">Home</a>
                 </li>
-                <li th:classappend="${module == 'tasks' ? 'active' : ''}">
-                    <a href="#" th:href="@{/task}">Eventos</a>
+                <li th:classappend="${module == 'eventos' ? 'active' : ''}">
+                    <a href="#" th:href="@{/event}">Eventos</a>
                 </li>
-                <li th:classappend="${module == 'tasks-ld' ? 'active' : ''}">
-                    <a href="#" th:href="@{/task-ld}">Palestras</a>
+
+                <li th:classappend="${module == 'post' ? 'active' : ''}">
+                    <a href="#" th:href="@{/post}">Posts</a>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">

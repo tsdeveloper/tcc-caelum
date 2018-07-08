@@ -14,7 +14,7 @@
     <script src="../../../resources/js/bootstrap.min.js" th:src="@{/resources/js/bootstrap.min.js}"></script>
 
     <!-- Custom scripts for this page only -->
-    <script class="custom-script" src="../../../resources/js/task/task.js" th:src="@{/resources/js/task/task.js}"></script>
+    <script class="custom-script" src="../../../resources/js/task/task.js" th:src="@{/resources/js/task/post.js}"></script>
 </head>
 <body>
 
@@ -38,19 +38,7 @@
                 <td>Due to</td>
             </tr>
             </thead>
-            <tbody>
-            <tr th:if="${tasks.empty}">
-                <td colspan="4">No tasks</td>
-            </tr>
-            <tr th:each="task : ${tasks}">
-                <td th:text="${task.id}">1</td>
-                <td>
-                    <a href="#" th:href="@{/task/{id}(id=${task.id})}" th:text="${task.title}">Title ...</a>
-                </td>
-                <td th:text="${task.text}">Text ...</td>
-                <td th:text="${#calendars.format(task.dueTo)}">July 11, 2017 2:17:16 PM CDT</td>
-            </tr>
-            </tbody>
+
         </table>
     </div>
 </div>
