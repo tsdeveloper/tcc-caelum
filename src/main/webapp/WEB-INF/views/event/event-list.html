@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--/* Title of this template will be passed to the head fragment along with custom links and scripts */-->
+<head th:replace="event/layout :: head(~{this :: title}, ~{this :: .custom-link}, ~{this :: .custom-script})">
+    <title>Event List</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="../../../resources/css/bootstrap.min.css" rel="stylesheet" media="screen" th:href="@{/resources/css/bootstrap.min.css}"/>
+    <link href="../../../resources/css/core.css" rel="stylesheet" media="screen" th:href="@{/resources/css/core.css}"/>
+
+    <!-- Custom links for this page only -->
+    <link class="custom-link" href="../../../resources/css/event/event.css" th:href="@{/resources/css/event/event.css}" />
+
+    <script src="../../../resources/js/jquery.min.js" th:src="@{/resources/js/jquery.min.js}"></script>
+    <script src="../../../resources/js/bootstrap.min.js" th:src="@{/resources/js/bootstrap.min.js}"></script>
+
+    <!-- Custom scripts for this page only -->
+    <script class="custom-script" src="../../../resources/js/event/event.js" th:src="@{/resources/js/event/event.js}"></script>
+</head>
+<body>
+
+<!--/* The element with breadcrumb class will be passed to the header fragment */-->
+<header th:insert="event/layout :: header(~{ :: .breadcrumb})">
+    <ol class="breadcrumb container">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Events</a></li>
+    </ol>
+</header>
+
+<!--/* Insert content fragment with content of the element with id = 'event-list' */-->
+<div th:insert="event/layout :: content(~{ :: #event-list})">
+    <div id="event-list">
+        <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <td>ID</td>
+                <td>Title</td>
+                <td>Text</td>
+                <td>Due to</td>
+                <td>By User</td>
+            </tr>
+            </thead>
+
+        </table>
+    </div>
+</div>
+
+<footer th:replace="event/layout :: footer">Footer</footer>
+
+</body>
+</html>
