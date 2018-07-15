@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<!--/* Title of this template will be passed to the head fragment along with custom links and scripts */-->
-<head th:replace="event/layout :: head(~{this :: title}, ~{this :: .custom-link}, ~{this :: .custom-script})">
-    <title>Event List</title>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{event/layout}">
+<head>
+    <title>Task List</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link href="../../../resources/css/bootstrap.min.css" rel="stylesheet" media="screen" th:href="@{/resources/css/bootstrap.min.css}"/>
     <link href="../../../resources/css/core.css" rel="stylesheet" media="screen" th:href="@{/resources/css/core.css}"/>
@@ -10,41 +11,61 @@
     <!-- Custom links for this page only -->
     <link class="custom-link" href="../../../resources/css/event/event.css" th:href="@{/resources/css/event/event.css}" />
 
-    <script src="../../../resources/js/jquery.min.js" th:src="@{/resources/js/jquery.min.js}"></script>
-    <script src="../../../resources/js/bootstrap.min.js" th:src="@{/resources/js/bootstrap.min.js}"></script>
 
-    <!-- Custom scripts for this page only -->
-    <script class="custom-script" src="../../../resources/js/event/event.js" th:src="@{/resources/js/event/event.js}"></script>
+
 </head>
 <body>
 
-<!--/* The element with breadcrumb class will be passed to the header fragment */-->
-<header th:insert="event/layout :: header(~{ :: .breadcrumb})">
-    <ol class="breadcrumb container">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Events</a></li>
-    </ol>
-</header>
+<!--/* Content of this page will be decorated by the elements of layout.html (task/layout) */-->
+<div layout:fragment="content">
 
-<!--/* Insert content fragment with content of the element with id = 'event-list' */-->
-<div th:insert="event/layout :: content(~{ :: #event-list})">
-    <div id="event-list">
-        <table class="table table-bordered table-striped">
-            <thead>
-            <tr>
-                <td>ID</td>
-                <td>Title</td>
-                <td>Text</td>
-                <td>Due to</td>
-                <td>By User</td>
-            </tr>
-            </thead>
+    <!--/* Demonstrating layout:include */-->
 
-        </table>
+    <div layout:insert="~{event/alert :: alert}" th:with="type='info', header='Info'" th:remove="tag">
+        <!--/* Implements alert content fragment with simple content */-->
+        <th:block layout:fragment="alert-content">
+            <p><em>This is a simple list of tasks!</em></p>
+        </th:block>
     </div>
+
+    <div layout:insert="~{event/alert :: alert}" th:with="type='danger', header='Oh snap! You got an error!'" th:remove="tag">
+        <!--/* Implements alert content fragment with full-blown HTML content */-->
+        <th:block layout:fragment="alert-content">
+            <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum.</p>
+            <p>
+                <button type="button" class="btn btn-danger">Take this action</button>
+                <button type="button" class="btn btn-default">Or do this</button>
+            </p>
+        </th:block>
+    </div>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <td>ID</td>
+            <td>Title</td>
+            <td>Text</td>
+            <td>Due to</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${events.empty}">
+            <td colspan="4">Nenhum evento foi cadastrado!</td>
+        </tr>
+        <tr th:each="event : ${events}">
+            <td th:text="${event.id}">1</td>
+            <td>
+                <a href="#" th:href="@{/task-ld/{id}(id=${event.id})}" th:text="${event.title}">Title ...</a>
+            </td>
+            <td th:text="${event.text}">Text ...</td>
+            <td th:text="${#calendars.format(event.dueTo)}">July 11, 2017 2:17:16 PM CDT</td>
+        </tr>
+        </tbody>
+    </table>
 </div>
 
-<footer th:replace="event/layout :: footer">Footer</footer>
 
+<script src="../../../resources/js/jquery.min.js" th:src="@{/resources/js/jquery.min.js}"></script>
+<script src="../../../resources/js/bootstrap.min.js" th:src="@{/resources/js/bootstrap.min.js}"></script>
 </body>
 </html>

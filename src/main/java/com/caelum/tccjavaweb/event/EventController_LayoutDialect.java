@@ -23,18 +23,18 @@ class EventController_LayoutDialect {
 
     @ModelAttribute("module")
     public String module() {
-        return "events-ld";
+        return "events";
     }
 
-    @RequestMapping(value = "event-ld", method = RequestMethod.GET)
+    @RequestMapping(value = "event", method = RequestMethod.GET)
     public String events(Model model) {
         model.addAttribute("events", eventService.findAll());
-        return "event-ld/event-list";
+        return "event/event-list";
     }
 
-    @RequestMapping(value = "event-ld/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "event/{id}", method = RequestMethod.GET)
     public String event(@PathVariable("id") Long id, Model model) {
         model.addAttribute("event", eventService.findOne(id));
-        return "event-ld/event";
+        return "event/event";
     }
 }
