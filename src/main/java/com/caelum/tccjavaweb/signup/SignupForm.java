@@ -1,9 +1,12 @@
 package com.caelum.tccjavaweb.signup;
 
+import com.caelum.tccjavaweb.role.Role;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
 import com.caelum.tccjavaweb.account.Account;
+
+import java.util.Arrays;
 
 public class SignupForm {
 
@@ -34,6 +37,6 @@ public class SignupForm {
 	}
 
 	public Account createAccount() {
-        return new Account(getEmail(), getPassword(), "ROLE_USER");
+        return new Account(getEmail(), getPassword(), Arrays.asList(new Role("USER"), new Role("ACTUATOR")));
 	}
 }

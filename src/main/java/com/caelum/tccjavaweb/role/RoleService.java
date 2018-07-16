@@ -1,6 +1,6 @@
-package com.caelum.tccjavaweb.account;
+package com.caelum.tccjavaweb.role;
 
-import com.caelum.tccjavaweb.role.Role;
+import com.caelum.tccjavaweb.account.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
@@ -10,48 +10,44 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
-import java.util.Arrays;
 import java.util.Collections;
 
 @Service
 @Scope(proxyMode = ScopedProxyMode.TARGET_CLASS)
-public class AccountService implements UserDetailsService {
+public class RoleService  {
 	
 	@Autowired
-	private AccountRepository accountRepository;
+	private RoleRepository roleRepository;
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
-	@PostConstruct
-	protected void initialize() {
-		save(new Account("user", "demo", Arrays.asList(new Role("ROLE_USER"))));
-		save(new Account("admin", "admin", Arrays.asList(new Role("ROLE_ADMIN"))));
-	}
+//	@PostConstruct
+//	protected void initialize() {
+//		save(new Role("ROLE_USER"));
+//		save(new Role("ROLE_ADMIN"));
+//
+//	}
 
 	@Transactional
-	public Account save(Account account) {
-		account.setPassword(passwordEncoder.encode(account.getPassword()));
-		accountRepository.save(account);
-		return account;
+	public Role save(Role role) {
+		roleRepository.save(role);
+		return role;
 	}
 
-	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Account account = accountRepository.findOneByEmail(username);
-		if(account == null) {
-			throw new UsernameNotFoundException("user not found");
-		}
-		return createUser(account);
-	}
+//	@Override
+//	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//		Account account = roleRepository.findOneByEmail(username);
+//		if(account == null) {
+//			throw new UsernameNotFoundException("user not found");
+//		}
+//		return createUser(account);
+//	}
 	
 	public void signin(Account account) {
 		SecurityContextHolder.getContext().setAuthentication(authenticate(account));

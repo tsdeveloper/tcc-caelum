@@ -1,5 +1,6 @@
 package com.caelum.tccjavaweb.event;
 
+import com.caelum.tccjavaweb.account.Account;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
@@ -24,15 +25,17 @@ public class Event {
     @Version
     private Calendar created = Calendar.getInstance();
 
-    public Calendar getDueTo() {
-        return dueTo;
+
+    public Account getCreator() {
+        return creator;
     }
 
-    public void setDueTo(Calendar dueTo) {
-        this.dueTo = dueTo;
+    public void setCreator(Account creator) {
+        this.creator = creator;
     }
 
-    private Calendar dueTo;
+    @ManyToOne
+    Account creator;
 
     public Event() {
     }
