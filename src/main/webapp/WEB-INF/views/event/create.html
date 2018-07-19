@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{task-ld/layout}">
+      layout:decorate="~{event/layout}">
 <head>
     <title>Task List</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link href="../../../resources/css/bootstrap.min.css" rel="stylesheet" media="screen" th:href="@{/resources/css/bootstrap.min.css}"/>
-    <link href="../../../resources/css/core.css" rel="stylesheet" media="screen" th:href="@{/resources/css/core.css}"/>
-    <script src="../../../resources/js/jquery.min.js" th:src="@{/resources/js/jquery.min.js}"></script>
-    <script src="../../../resources/js/bootstrap.min.js" th:src="@{/resources/js/bootstrap.min.js}"></script>
+
 </head>
 <body>
 
@@ -17,17 +14,17 @@
 
     <!--/* Demonstrating layout:include */-->
 
-    <div layout:insert="~{task-ld/alert :: alert}" th:with="type='info', header='Info'" th:remove="tag">
+    <div layout:insert="~{event/alert :: alert}" th:with="type='info', header='Info'" th:remove="tag">
         <!--/* Implements alert content fragment with simple content */-->
         <th:block layout:fragment="alert-content">
-            <p><em>TTeste CSS</em></p>
+            <p><em>This is a simple list of tasks!</em></p>
         </th:block>
     </div>
 
-    <div layout:insert="~{task-ld/alert :: alert}" th:with="type='danger', header='Oh snap! You got an error!'" th:remove="tag">
+    <div layout:insert="~{event/alert :: alert}" th:with="type='danger', header='Oh snap! You got an error!'" th:remove="tag">
         <!--/* Implements alert content fragment with full-blown HTML content */-->
         <th:block layout:fragment="alert-content">
-            <p>Teste CSS.</p>
+            <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum.</p>
             <p>
                 <button type="button" class="btn btn-danger">Take this action</button>
                 <button type="button" class="btn btn-default">Or do this</button>
@@ -42,22 +39,25 @@
             <td>Title</td>
             <td>Text</td>
             <td>Due to</td>
+            <td>Criado por</td>
         </tr>
         </thead>
         <tbody>
-        <tr th:if="${tasks.empty}">
-            <td colspan="4">No tasks</td>
+        <tr th:if="${events.empty}">
+            <td colspan="4">Nenhum evento foi cadastrado!</td>
         </tr>
-        <tr th:each="task : ${tasks}">
-            <td th:text="${task.id}">1</td>
+        <tr th:each="event : ${events}">
+            <td th:text="${event.id}">1</td>
             <td>
-                <a href="#" th:href="@{/task-ld/{id}(id=${task.id})}" th:text="${task.title}">Title ...</a>
+                <a href="#" th:href="@{/task-ld/{id}(id=${event.id})}" th:text="${event.title}">Title ...</a>
             </td>
-            <td th:text="${task.text}">Text ...</td>
-            <td th:text="${#calendars.format(task.dueTo)}">July 11, 2017 2:17:16 PM CDT</td>
+            <td th:text="${event.text}">Text ...</td>
+            <td th:text="${#calendars.format(event.dueTo)}">July 11, 2017 2:17:16 PM CDT</td>
         </tr>
         </tbody>
     </table>
 </div>
+
+
 </body>
 </html>

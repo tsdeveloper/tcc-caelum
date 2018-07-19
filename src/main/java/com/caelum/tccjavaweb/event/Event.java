@@ -40,10 +40,10 @@ public class Event {
     public Event() {
     }
 
-    public Event(String title, String text, String date) {
+    public Event(String title, String text) {
         this.title = title;
         this.text = text;
-        this.dueTo = toCalendar(date);
+
     }
 
     private Calendar toCalendar(String dateString) {
