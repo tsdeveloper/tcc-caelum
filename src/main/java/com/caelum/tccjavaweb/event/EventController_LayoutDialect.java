@@ -40,7 +40,8 @@ class EventController_LayoutDialect {
 
 
     @RequestMapping(value = "event/create", method = RequestMethod.GET)
-    public String event(Model model) {
+    public String tasks(Model model) {
+
         return "event/create";
     }
 }

@@ -14,38 +14,31 @@
 
     <!--/* Demonstrating layout:include */-->
 
-    <div layout:insert="~{event/alert :: alert}" th:with="type='info', header='Info'" th:remove="tag">
-        <!--/* Implements alert content fragment with simple content */-->
-        <th:block layout:fragment="alert-content">
-            <p><em>Teste CSS</em></p>
-        </th:block>
-    </div>
-<div class="test"><h1>Teste CSS</h1></div>
-    <div layout:insert="~{event/alert :: alert}" th:with="type='danger', header='Oh snap! You got an error!'" th:remove="tag">
-        <!--/* Implements alert content fragment with full-blown HTML content */-->
-        <th:block layout:fragment="alert-content">
-            <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum.</p>
-            <p>
-                <button type="button" class="btn btn-danger">Take this action</button>
-                <button type="button" class="btn btn-default">Or do this</button>
-            </p>
-        </th:block>
+
+    <div class="card-body">
+
+
+        <div class="row">
+            <div class="col text-right">
+                <a href="#" class="btn btn-success" th:href="@{event/create/}">Novo</a>
+            </div>
+        </div>
+        <br />
+
     </div>
 
     <table class="table table-bordered table-striped">
         <thead>
         <tr>
             <td>ID</td>
-            <td>Title</td>
-            <td>Text</td>
-            <td>Due to</td>
+            <td>Data de Cadastro</td>
+            <td>Título</td>
+            <td>Descricao</td>
             <td>Criado por</td>
         </tr>
         </thead>
         <tbody>
-        <tr th:if="${events.empty}">
-            <td colspan="4">Nenhum evento foi cadastrado!</td>
-        </tr>
+
         <tr th:each="event : ${events}">
             <td th:text="${event.id}">1</td>
             <td>
@@ -53,6 +46,9 @@
             </td>
             <td th:text="${event.text}">Text ...</td>
             <td th:text="${#calendars.format(event.dueTo)}">July 11, 2017 2:17:16 PM CDT</td>
+        </tr>
+        <tr th:if="${events.empty}">
+            <td colspan="4">Nenhum evento foi cadastrado!</td>
         </tr>
         </tbody>
     </table>

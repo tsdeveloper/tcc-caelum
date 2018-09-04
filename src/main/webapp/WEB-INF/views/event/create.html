@@ -3,26 +3,26 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{event/layout}">
 <head>
-    <title>Task List</title>
+    <title>Event Create</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
 </head>
 <body>
 
 <!--/* Content of this page will be decorated by the elements of layout.html (task/layout) */-->
-<div layout:fragment="content">
+<!--<div layout:fragment="content">
 
-    <!--/* Demonstrating layout:include */-->
+    &lt;!&ndash;/* Demonstrating layout:include */&ndash;&gt;
 
     <div layout:insert="~{event/alert :: alert}" th:with="type='info', header='Info'" th:remove="tag">
-        <!--/* Implements alert content fragment with simple content */-->
+        &lt;!&ndash;/* Implements alert content fragment with simple content */&ndash;&gt;
         <th:block layout:fragment="alert-content">
             <p><em>This is a simple list of tasks!</em></p>
         </th:block>
     </div>
 
     <div layout:insert="~{event/alert :: alert}" th:with="type='danger', header='Oh snap! You got an error!'" th:remove="tag">
-        <!--/* Implements alert content fragment with full-blown HTML content */-->
+        &lt;!&ndash;/* Implements alert content fragment with full-blown HTML content */&ndash;&gt;
         <th:block layout:fragment="alert-content">
             <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum.</p>
             <p>
@@ -32,31 +32,83 @@
         </th:block>
     </div>
 
-    <table class="table table-bordered table-striped">
-        <thead>
-        <tr>
-            <td>ID</td>
-            <td>Title</td>
-            <td>Text</td>
-            <td>Due to</td>
-            <td>Criado por</td>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:if="${events.empty}">
-            <td colspan="4">Nenhum evento foi cadastrado!</td>
-        </tr>
-        <tr th:each="event : ${events}">
-            <td th:text="${event.id}">1</td>
-            <td>
-                <a href="#" th:href="@{/task-ld/{id}(id=${event.id})}" th:text="${event.title}">Title ...</a>
-            </td>
-            <td th:text="${event.text}">Text ...</td>
-            <td th:text="${#calendars.format(event.dueTo)}">July 11, 2017 2:17:16 PM CDT</td>
-        </tr>
-        </tbody>
-    </table>
-</div>
+    <div class="card">
+        <div class="card-header text-center font-weight-bold">
+            <h3>Cadastra novas cobranças</h3>
+        </div>
+        &lt;!&ndash;<div class="card-body">
+
+
+            <div class="row">
+                <div class="col text-right">
+                    <a href="/titulos" class="btn btn-info">Voltar para pesquisa</a>
+                </div>
+            </div>
+            <br />
+
+          &lt;!&ndash;  <form action="/titulos" method="post" th:object="${titulo}">
+
+                <input type="hidden" th:field="*{codigo}"/>
+                <div layout:include="fragments/_success"></div>
+                <div layout:include="fragments/_error"></div>
+
+                <div class="row has-e">
+                    <div class="col-6">
+                        <div class="form-group" th:classappend="${#fields.hasErrors('descricao')} ? 'has-error'">
+                            <label for="descricao">Descrição</label>
+                            <input th:field="*{descricao}"
+                                   name="descricao" type="text" class="form-control" id="descricao"
+                                   aria-describedby="descricaoHelp" placeholder="Digite uma descrição"/>
+                            <small id="descricaoHelp" class="form-text text-muted">Campo obrigatório.</small>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="form-group">
+                            <label for="dataVencimento">Data de Vencimento</label>
+                            <input th:field="*{dataVencimento}"
+                                   name="dataVencimento" type="text" class="form-control" id="dataVencimento"
+                                   data-provide="datepicker" data-date-format="dd/mm/yyyy" data-date-language="pt-BR"
+                                   data-date-autoclose="true"
+                                   data-date-today-highlight="true" data-date-orientation="bottom"
+
+                                   aria-describedby="vencHelp" placeholder="Vencimento"/>
+                            <small id="venccHelp" class="form-text text-muted">Campo obrigatório.</small>
+                        </div>
+                    </div>
+
+                    <div class="col-2">
+                        <div class="form-group">
+                            <label for="valor">Valor</label>
+                            <input th:field="*{valor}"
+                                   name="valor" type="text" class="form-control js-currency" id="valor"
+                                   aria-describedby="valorHelp" placeholder="Digite um valor"/>
+                            <small id="valorHelp" class="form-text text-muted">Campo obrigatório.</small>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="form-group">
+                            <label for="status">Status</label>
+                            <select name="status" id="status" class="custom-select">
+                                <option th:each="status : ${todosStatusTitulo}" th:value="${status}"
+                                        th:field="*{status}" th:text="${status.descricao}"></option>
+
+
+                            </select>
+                            <small id="statusHelp" class="form-text text-muted">Campo obrigatório.</small>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <button type="submit" class="btn btn-primary">Salvar</button>
+            </form>
+
+&ndash;&gt;
+
+        </div>&ndash;&gt;
+    </div>
+</div>-->
 
 
 </body>
