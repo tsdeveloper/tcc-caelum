@@ -29,11 +29,11 @@ public class SpeecheService  {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
-	@PostConstruct
+	/*@PostConstruct
 	protected void initialize() {
 		save(new Speeche("user", "demo", "ROLE_USER"));
 		save(new Speeche("admin", "admin", "ROLE_ADMIN"));
-	}
+	}*/
 
 	@Transactional
 	public Speeche save(Speeche account) {

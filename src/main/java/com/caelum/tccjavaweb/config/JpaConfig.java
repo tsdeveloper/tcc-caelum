@@ -37,8 +37,8 @@ class JpaConfig {
     private String password;
     @Value("${hibernate.dialect}")
     private String dialect;
-    @Value("${hibernate.hbm2ddl.auto}")
-    private String hbm2ddlAuto;
+  /*  @Value("${hibernate.hbm2ddl.auto}")
+    private String hbm2ddlAuto;*/
     @Value("${hibernate.show_sql}")
     private String showSql;
     @Value("${hibernate.format_sql}")
@@ -74,7 +74,7 @@ class JpaConfig {
 
         Properties jpaProperties = new Properties();
         jpaProperties.put(Environment.DIALECT, dialect);
-        jpaProperties.put(Environment.HBM2DDL_AUTO, hbm2ddlAuto);
+        /*jpaProperties.put(Environment.HBM2DDL_AUTO, hbm2ddlAuto);*/
         jpaProperties.put(Environment.SHOW_SQL, showSql);
         jpaProperties.put(Environment.FORMAT_SQL, formatSql);
         jpaProperties.put(Environment.USE_SQL_COMMENTS, useSqlComments);

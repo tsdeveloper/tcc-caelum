@@ -31,12 +31,12 @@ public class AccountService implements UserDetailsService {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
-	@PostConstruct
+	/*@PostConstruct
 	protected void initialize() {
 		save(new Account("user", "demo", Arrays.asList(new Role("ROLE_USER"))));
 		save(new Account("admin", "admin", Arrays.asList(new Role("ROLE_ADMIN"))));
 	}
-
+*/
 	@Transactional
 	public Account save(Account account) {
 		account.setPassword(passwordEncoder.encode(account.getPassword()));

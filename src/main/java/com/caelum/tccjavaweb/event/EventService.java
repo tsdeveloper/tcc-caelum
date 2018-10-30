@@ -27,4 +27,15 @@ class EventService {
     public Event findOne(Long id) {
         return eventRepository.findOne(id);
     }
+
+    public Event save(Event event) throws Exception {
+
+        try {
+            return eventRepository.save(event);
+
+        }catch (Exception e){
+             throw  new Exception(e.getMessage());
+        }
+
+    }
 }
